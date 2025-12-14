@@ -93,8 +93,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold mb-1">Email</h3>
-                      <p className="text-muted-foreground">support@aischool.com</p>
-                      <p className="text-muted-foreground">sales@aischool.com</p>
+                      <p className="text-muted-foreground">support@edurance.com</p>
+                      <p className="text-muted-foreground">sales@Edurance.com</p>
                     </div>
                   </div>
 
@@ -104,7 +104,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold mb-1">Phone</h3>
-                      <p className="text-muted-foreground">+91 98765 43210</p>
+                      <p className="text-muted-foreground">+91 73865 38067</p>
                       <p className="text-sm text-muted-foreground">Mon-Sat, 9 AM - 6 PM IST</p>
                     </div>
                   </div>
@@ -116,9 +116,9 @@ const Contact = () => {
                     <div>
                       <h3 className="font-semibold mb-1">Office</h3>
                       <p className="text-muted-foreground">
-                        123 Innovation Park,<br />
-                        Koramangala, Bengaluru,<br />
-                        Karnataka 560034
+                        Neerja colony,<br />
+                        Tolichowki, Hyderabad,<br />
+                        Telengana 500008
                       </p>
                     </div>
                   </div>

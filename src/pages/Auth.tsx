@@ -32,7 +32,7 @@ const Auth = () => {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     
     if (isSignUp) {
-      toast.success("Account created! Welcome to AI School.");
+      toast.success("Account created! Welcome to Edurance.");
     } else {
       toast.success("Welcome back! Redirecting to dashboard...");
     }
@@ -63,7 +63,7 @@ const Auth = () => {
               <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground">
                 <GraduationCap className="w-6 h-6" />
               </div>
-              <span className="text-xl font-bold">AI School</span>
+              <span className="text-xl font-bold">Edurance</span>
             </Link>
 
             <h1 className="text-3xl font-bold mb-2">
@@ -206,23 +206,9 @@ const Auth = () => {
               Learn Smarter, Not Harder
             </h2>
             <p className="text-xl text-primary-foreground/80 max-w-md">
-              Join 50,000+ students who are already learning with their personal AI tutor.
-            </p>
+  Personalized learning, built for every student.
+</p>
 
-            <div className="mt-12 grid grid-cols-3 gap-8">
-              <div>
-                <div className="text-3xl font-bold text-primary-foreground">3</div>
-                <div className="text-sm text-primary-foreground/70">Free Lessons</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-primary-foreground">24/7</div>
-                <div className="text-sm text-primary-foreground/70">Availability</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-primary-foreground">K-12</div>
-                <div className="text-sm text-primary-foreground/70">All Grades</div>
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>

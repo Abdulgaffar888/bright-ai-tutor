@@ -69,7 +69,7 @@ export function Footer() {
               <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground">
                 <GraduationCap className="w-6 h-6" />
               </div>
-              <span className="text-xl font-bold">AI School</span>
+              <span className="text-xl font-bold">Edurance</span>
             </Link>
             <p className="text-background/70 text-sm mb-6">
               Making world-class tutoring accessible to every child through AI-powered personalized education.
@@ -161,21 +161,21 @@ export function Footer() {
         <div className="flex flex-col md:flex-row gap-6 py-8 border-t border-background/10">
           <div className="flex items-center gap-2 text-sm text-background/70">
             <Mail className="w-4 h-4" />
-            <span>support@aischool.com</span>
+            <span>support@Edurance.com</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-background/70">
             <Phone className="w-4 h-4" />
-            <span>+91 98765 43210</span>
+            <span>+91 73865 38067</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-background/70">
             <MapPin className="w-4 h-4" />
-            <span>Bengaluru, India</span>
+            <span>Hyderabad, India</span>
           </div>
         </div>
 
         {/* Copyright */}
         <div className="pt-8 border-t border-background/10 text-center text-sm text-background/50">
-          <p>© {new Date().getFullYear()} AI School. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Edurance. All rights reserved.</p>
         </div>
       </div>
     </footer>

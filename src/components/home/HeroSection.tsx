@@ -51,21 +51,7 @@ export function HeroSection() {
               </Button>
             </div>
 
-            {/* Stats */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-8 mt-10 pt-10 border-t border-border">
-              <div>
-                <div className="text-3xl font-bold text-foreground">50K+</div>
-                <div className="text-sm text-muted-foreground">Active Students</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-foreground">1M+</div>
-                <div className="text-sm text-muted-foreground">Lessons Generated</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-foreground">4.9★</div>
-                <div className="text-sm text-muted-foreground">Parent Rating</div>
-              </div>
-            </div>
+            
           </motion.div>
 
           {/* Hero Image */}

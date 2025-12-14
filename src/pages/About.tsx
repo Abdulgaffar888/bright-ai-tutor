@@ -53,13 +53,6 @@ const values = [
   },
 ];
 
-const milestones = [
-  { year: "2022", event: "AI School founded in Bengaluru" },
-  { year: "2023", event: "Launched beta with 1,000 students" },
-  { year: "2023", event: "Raised seed funding" },
-  { year: "2024", event: "Reached 50,000 active students" },
-  { year: "2024", event: "Expanded to all Indian states" },
-];
 
 const About = () => {
   return (
@@ -100,7 +93,7 @@ const About = () => {
                 <h2 className="text-3xl lg:text-4xl font-bold mb-6">Our Story</h2>
                 <div className="space-y-4 text-muted-foreground">
                   <p>
-                    AI School was born from a simple observation: the best tutors are expensive 
+                    Edurance was born from a simple observation: the best tutors are expensive 
                     and inaccessible to most families. A child in a tier-3 city deserves the same 
                     quality education as one in an elite school.
                   </p>
@@ -117,25 +110,7 @@ const About = () => {
                 </div>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="bg-card rounded-2xl p-8 shadow-card"
-              >
-                <h3 className="text-xl font-bold mb-6">Our Journey</h3>
-                <div className="space-y-4">
-                  {milestones.map((milestone, index) => (
-                    <div key={index} className="flex gap-4">
-                      <div className="w-16 text-sm font-semibold text-primary">
-                        {milestone.year}
-                      </div>
-                      <div className="flex-1 text-foreground">{milestone.event}</div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
+              
             </div>
           </div>
         </section>
@@ -217,29 +192,7 @@ const About = () => {
           </div>
         </section>
 
-        {/* Stats */}
-        <section className="py-20 lg:py-28 bg-primary">
-          <div className="container">
-            <div className="grid md:grid-cols-4 gap-8 text-center">
-              <div>
-                <div className="text-5xl font-bold text-primary-foreground mb-2">50K+</div>
-                <div className="text-primary-foreground/80">Active Students</div>
-              </div>
-              <div>
-                <div className="text-5xl font-bold text-primary-foreground mb-2">1M+</div>
-                <div className="text-primary-foreground/80">Lessons Generated</div>
-              </div>
-              <div>
-                <div className="text-5xl font-bold text-primary-foreground mb-2">28</div>
-                <div className="text-primary-foreground/80">States Covered</div>
-              </div>
-              <div>
-                <div className="text-5xl font-bold text-primary-foreground mb-2">4.9★</div>
-                <div className="text-primary-foreground/80">Parent Rating</div>
-              </div>
-            </div>
-          </div>
-        </section>
+       
       </main>
       <Footer />
     </div>

@@ -23,7 +23,7 @@ export function Navbar() {
           <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground">
             <GraduationCap className="w-6 h-6" />
           </div>
-          <span className="text-xl font-bold text-foreground">AI School</span>
+          <span className="text-xl font-bold text-foreground">Edurance</span>
         </Link>
 
         {/* Desktop Navigation */}

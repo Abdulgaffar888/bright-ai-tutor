@@ -58,7 +58,7 @@ const Dashboard = () => {
             <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground">
               <GraduationCap className="w-6 h-6" />
             </div>
-            <span className="text-xl font-bold">AI School</span>
+            <span className="text-xl font-bold">Edurance</span>
           </div>
 
           {/* Navigation */}
@@ -90,7 +90,7 @@ const Dashboard = () => {
                 <span className="text-sm font-semibold text-primary">AS</span>
               </div>
               <div className="flex-1 min-w-0">
-                <div className="font-medium truncate">Aditya Sharma</div>
+                <div className="font-medium truncate">Rahil</div>
                 <div className="text-xs text-muted-foreground">Class 10</div>
               </div>
             </div>
@@ -126,7 +126,7 @@ const Dashboard = () => {
             </button>
 
             <div className="flex-1 lg:flex-none">
-              <h1 className="text-xl font-bold">Welcome back, Aditya! 👋</h1>
+              <h1 className="text-xl font-bold">Welcome back, Rahil! 👋</h1>
             </div>
 
             <Button variant="hero" size="sm" asChild>
