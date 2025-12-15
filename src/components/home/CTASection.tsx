@@ -29,9 +29,6 @@ export function CTASection() {
             Ready to Transform How Your Child Learns?
           </h2>
 
-          <p className="text-xl text-primary-foreground/80 mb-10">
-            Join 50,000+ students already learning smarter. Start with 3 free lessons — no credit card required.
-          </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
