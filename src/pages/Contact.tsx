@@ -27,8 +27,8 @@ const faqs = [
     answer: "Yes, our premium plans include preparation support for JEE, NEET, NTSE, Olympiads, and other competitive exams with specialized practice questions and topic coverage.",
   },
   {
-    question: "What devices can I use AI School on?",
-    answer: "AI School works on any device with a web browser — smartphones, tablets, laptops, and desktop computers. We also have Android and iOS apps for a better mobile experience.",
+    question: "What devices can I use Edurance on?",
+    answer: "Edurance works on any device with a web browser — smartphones, tablets, laptops, and desktop computers. We also have Android and iOS apps for a better mobile experience.",
   },
   {
     question: "How do I track my child's progress?",

@@ -44,21 +44,21 @@ const values = [
   {
     icon: Globe,
     title: "Global Standards",
-    description: "We bring Ivy League quality education to every village and city in India.",
+    description: "We bring world-class learning experiences to every student, everywhere.",
   },
   {
     icon: Award,
     title: "Excellence",
-    description: "We're never satisfied. We constantly improve based on student outcomes.",
+    description: "We constantly improve so students never feel left behind.",
   },
 ];
-
 
 const About = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
       <main>
+
         {/* Hero */}
         <section className="pt-24 lg:pt-32 pb-16 lg:pb-24 bg-hero-gradient">
           <div className="container">
@@ -73,45 +73,67 @@ const About = () => {
                 <span className="text-gradient">Accessible to All</span>
               </h1>
               <p className="text-lg text-muted-foreground">
-                We're on a mission to give every child access to the best education, 
-                regardless of their background or location.
+                Education should never depend on favoritism, speed, or background.
               </p>
             </motion.div>
           </div>
         </section>
 
-        {/* Mission & Vision */}
+        {/* Our Story */}
         <section className="py-20 lg:py-28 bg-background">
-          <div className="container">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                <h2 className="text-3xl lg:text-4xl font-bold mb-6">Our Story</h2>
-                <div className="space-y-4 text-muted-foreground">
-                  <p>
-                    Edurance was born from a simple observation: the best tutors are expensive 
-                    and inaccessible to most families. A child in a tier-3 city deserves the same 
-                    quality education as one in an elite school.
-                  </p>
-                  <p>
-                    Our founders — engineers, educators, and parents — came together to solve 
-                    this problem. What if AI could be the great equalizer? What if every child 
-                    could have a personal tutor that adapts to their needs?
-                  </p>
-                  <p>
-                    Today, we're proud to serve 50,000+ students across India. But we're just 
-                    getting started. Our vision is to build the "AI Ivy League" — world-class 
-                    education for everyone.
-                  </p>
-                </div>
-              </motion.div>
+          <div className="container max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6">Our Story</h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p>
+                  Edurance was born from a simple but painful truth — many students
+                  are ignored not because they lack potential, but because classrooms
+                  move too fast.
+                </p>
+                <p>
+                  Teachers often focus on a few, while others quietly fall behind.
+                  Questions remain unanswered. Confidence slowly fades.
+                </p>
+                <p>
+                  We built Edurance for those students — the ones who need patience,
+                  clarity, and someone who never gives up on them.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
 
-              
-            </div>
+        {/* Mission & Vision (NEW SECTION) */}
+        <section className="py-20 lg:py-28 bg-muted/30">
+          <div className="container max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6">Our Vision</h2>
+              <p className="text-lg text-muted-foreground mb-10 leading-relaxed">
+                We envision a world where no student feels invisible.
+                A world where learning is personal, patient, and supportive —
+                not rushed or judgmental.
+              </p>
+
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6">Our Mission</h2>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                To stand beside every learner when they feel stuck, confused,
+                or left behind — and help them move forward with confidence.
+              </p>
+
+              <p className="text-xl font-semibold text-gradient">
+                Edurance — A tutor that never gives up on you.
+              </p>
+            </motion.div>
           </div>
         </section>
 
@@ -164,7 +186,7 @@ const About = () => {
             >
               <h2 className="text-3xl lg:text-4xl font-bold mb-4">Meet Our Team</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Engineers, educators, and dreamers united by a common mission.
+                Builders, educators, and believers in equal learning.
               </p>
             </motion.div>
 
@@ -192,7 +214,6 @@ const About = () => {
           </div>
         </section>
 
-       
       </main>
       <Footer />
     </div>

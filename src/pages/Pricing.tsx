@@ -15,7 +15,7 @@ const plans = [
     name: "Free",
     price: "₹0",
     period: "forever",
-    description: "Try AI School with basic features",
+    description: "Try Edurance with basic features",
     features: [
       { name: "3 lessons per day", included: true },
       { name: "Basic doubt solving", included: true },
@@ -203,7 +203,7 @@ const Pricing = () => {
                 For Schools & Tuition Centers
               </h2>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Special pricing for educational institutions. Get AI School for your entire class or coaching center.
+                Special pricing for educational institutions. Get Edurance for your entire class or coaching center.
               </p>
               <Button variant="outline" size="lg" asChild>
                 <Link to="/contact">Contact Sales</Link>

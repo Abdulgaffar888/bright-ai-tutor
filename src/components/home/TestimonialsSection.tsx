@@ -21,7 +21,7 @@ const testimonials = [
     name: "Anita Reddy",
     role: "Parent of twins",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-    content: "Both my kids learn differently - one is visual, one prefers reading. AI School adapts to each of them. The progress dashboard helps me stay involved without hovering.",
+    content: "Both my kids learn differently - one is visual, one prefers reading. Edurance adapts to each of them. The progress dashboard helps me stay involved without hovering.",
     rating: 5,
   },
 ];

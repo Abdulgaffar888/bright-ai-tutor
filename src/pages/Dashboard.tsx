@@ -9,7 +9,6 @@ import {
   Settings,
   LogOut,
   Menu,
-  X,
   Play,
   Clock,
   Trophy,
@@ -20,6 +19,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
+
+/**
+ * FEATURE FLAG
+ * Set to true when you want to re-enable the dashboard content
+ */
+const ENABLE_DASHBOARD = false;
 
 const sidebarItems = [
   { icon: Home, label: "Dashboard", href: "/dashboard", active: true },
@@ -89,11 +94,12 @@ const Dashboard = () => {
               <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                 <span className="text-sm font-semibold text-primary">AS</span>
               </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-medium truncate">Rahil</div>
+              <div>
+                <div className="font-medium">Rahil</div>
                 <div className="text-xs text-muted-foreground">Class 10</div>
               </div>
             </div>
+
             <Link
               to="/"
               className="flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
@@ -105,7 +111,7 @@ const Dashboard = () => {
         </div>
       </aside>
 
-      {/* Mobile sidebar overlay */}
+      {/* Mobile overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-foreground/20 backdrop-blur-sm z-40 lg:hidden"
@@ -113,21 +119,19 @@ const Dashboard = () => {
         />
       )}
 
-      {/* Main Content */}
+      {/* Main */}
       <main className="lg:ml-64">
         {/* Header */}
         <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-lg border-b border-border">
           <div className="flex items-center justify-between px-6 py-4">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-2 -ml-2 text-foreground"
+              className="lg:hidden p-2 -ml-2"
             >
               <Menu className="w-6 h-6" />
             </button>
 
-            <div className="flex-1 lg:flex-none">
-              <h1 className="text-xl font-bold">Welcome back, Rahil! 👋</h1>
-            </div>
+            <h1 className="text-xl font-bold">Welcome back, Rahil! 👋</h1>
 
             <Button variant="hero" size="sm" asChild>
               <Link to="/dashboard/ask" className="flex items-center gap-2">
@@ -138,189 +142,84 @@ const Dashboard = () => {
           </div>
         </header>
 
-        {/* Dashboard Content */}
-        <div className="p-6">
-          {/* Stats Cards */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className="bg-card rounded-2xl p-6 shadow-soft"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <BookOpen className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <div className="text-2xl font-bold">24</div>
-                  <div className="text-sm text-muted-foreground">Lessons Completed</div>
-                </div>
-              </div>
-            </motion.div>
+        {/* DASHBOARD CONTENT (DISABLED FOR NOW) */}
+        {ENABLE_DASHBOARD && (
+          <div className="p-6">
+            {/* Stats Cards */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <Stat icon={BookOpen} label="Lessons Completed" value="24" />
+              <Stat icon={Clock} label="Learning Time" value="8.5h" />
+              <Stat icon={Trophy} label="Quiz Accuracy" value="85%" />
+              <Stat icon={Target} label="Day Streak 🔥" value="7" />
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="bg-card rounded-2xl p-6 shadow-soft"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
-                  <Clock className="w-6 h-6 text-accent" />
+            <div className="grid lg:grid-cols-3 gap-6">
+              {/* Recent Topics */}
+              <div className="lg:col-span-2 bg-card rounded-2xl p-6 shadow-soft">
+                <div className="flex justify-between mb-6">
+                  <h2 className="text-lg font-bold">Recent Topics</h2>
+                  <Link to="/dashboard/lessons" className="text-primary text-sm">
+                    View All <ChevronRight className="inline w-4 h-4" />
+                  </Link>
                 </div>
-                <div>
-                  <div className="text-2xl font-bold">8.5h</div>
-                  <div className="text-sm text-muted-foreground">Learning Time</div>
-                </div>
-              </div>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.2 }}
-              className="bg-card rounded-2xl p-6 shadow-soft"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Trophy className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <div className="text-2xl font-bold">85%</div>
-                  <div className="text-sm text-muted-foreground">Quiz Accuracy</div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.3 }}
-              className="bg-card rounded-2xl p-6 shadow-soft"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
-                  <Target className="w-6 h-6 text-accent" />
-                </div>
-                <div>
-                  <div className="text-2xl font-bold">7</div>
-                  <div className="text-sm text-muted-foreground">Day Streak 🔥</div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-6">
-            {/* Recent Topics */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="lg:col-span-2 bg-card rounded-2xl p-6 shadow-soft"
-            >
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-lg font-bold">Recent Topics</h2>
-                <Link
-                  to="/dashboard/lessons"
-                  className="text-sm text-primary hover:underline flex items-center gap-1"
-                >
-                  View All <ChevronRight className="w-4 h-4" />
-                </Link>
-              </div>
-
-              <div className="space-y-4">
-                {recentTopics.map((topic, index) => (
-                  <div
-                    key={topic.name}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-muted/50 hover:bg-muted transition-colors"
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                      <BookOpen className="w-6 h-6 text-primary" />
+                {recentTopics.map((t) => (
+                  <div key={t.name} className="mb-4">
+                    <div className="flex justify-between text-sm">
+                      <span>{t.name}</span>
+                      <span>{t.progress}%</span>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold truncate">{topic.name}</div>
-                      <div className="text-sm text-muted-foreground">{topic.subject}</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-sm font-medium">{topic.progress}%</div>
-                      <div className="text-xs text-muted-foreground">{topic.time}</div>
-                    </div>
-                    <div className="w-20 hidden sm:block">
-                      <Progress value={topic.progress} className="h-2" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Recommended Lessons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-              className="bg-card rounded-2xl p-6 shadow-soft"
-            >
-              <h2 className="text-lg font-bold mb-6">Recommended for You</h2>
-
-              <div className="space-y-4">
-                {recommendedLessons.map((lesson, index) => (
-                  <div
-                    key={lesson.title}
-                    className="p-4 rounded-xl border border-border hover:border-primary/50 hover:shadow-soft transition-all cursor-pointer"
-                  >
-                    <div className="font-semibold mb-1">{lesson.title}</div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <span>{lesson.subject}</span>
-                      <span>•</span>
-                      <span>{lesson.duration}</span>
-                    </div>
-                    <div className="mt-2">
-                      <span className={cn(
-                        "text-xs px-2 py-1 rounded-full",
-                        lesson.difficulty === "Easy" 
-                          ? "bg-primary/10 text-primary"
-                          : "bg-accent/10 text-accent"
-                      )}>
-                        {lesson.difficulty}
-                      </span>
-                    </div>
+                    <Progress value={t.progress} />
                   </div>
                 ))}
               </div>
 
-              <Button variant="outline" className="w-full mt-4">
-                Browse All Lessons
-              </Button>
-            </motion.div>
-          </div>
+              {/* Recommended */}
+              <div className="bg-card rounded-2xl p-6 shadow-soft">
+                <h2 className="text-lg font-bold mb-4">Recommended for You</h2>
+                {recommendedLessons.map((l) => (
+                  <div key={l.title} className="mb-3">
+                    <div className="font-medium">{l.title}</div>
+                    <div className="text-sm text-muted-foreground">
+                      {l.subject} • {l.duration}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-          {/* Quick Ask Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.4 }}
-            className="mt-6 bg-gradient-to-r from-primary to-primary/80 rounded-2xl p-8 text-primary-foreground"
-          >
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* CTA */}
+            <div className="mt-8 bg-primary text-primary-foreground rounded-2xl p-8 flex justify-between">
               <div>
-                <h2 className="text-2xl font-bold mb-2">Got a doubt? Ask away!</h2>
-                <p className="text-primary-foreground/80">
-                  Your AI tutor is ready to help you understand any concept.
-                </p>
+                <h2 className="text-2xl font-bold">Got a doubt?</h2>
+                <p>Ask your AI tutor anytime.</p>
               </div>
-              <Button variant="secondary" size="lg" asChild>
-                <Link to="/dashboard/ask" className="flex items-center gap-2">
-                  <Play className="w-5 h-5" />
+              <Button variant="secondary" asChild>
+                <Link to="/dashboard/ask">
+                  <Play className="w-5 h-5 mr-2" />
                   Start Learning
                 </Link>
               </Button>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        )}
       </main>
     </div>
   );
 };
+
+function Stat({ icon: Icon, label, value }: any) {
+  return (
+    <div className="bg-card p-6 rounded-2xl shadow-soft flex gap-4">
+      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+        <Icon className="w-6 h-6 text-primary" />
+      </div>
+      <div>
+        <div className="text-2xl font-bold">{value}</div>
+        <div className="text-sm text-muted-foreground">{label}</div>
+      </div>
+    </div>
+  );
+}
 
 export default Dashboard;

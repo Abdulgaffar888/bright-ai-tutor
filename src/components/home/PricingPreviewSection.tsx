@@ -8,7 +8,7 @@ const plans = [
     name: "Free",
     price: "₹0",
     period: "forever",
-    description: "Perfect for trying out AI School",
+    description: "Perfect for trying out Edurance",
     features: [
       "3 lessons per day",
       "Basic doubt solving",

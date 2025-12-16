@@ -64,7 +64,7 @@ export function HeroSection() {
             <div className="relative rounded-2xl overflow-hidden shadow-elevated">
               <img
                 src={heroStudents}
-                alt="Students learning with AI School"
+                alt="Students learning with Edurance"
                 className="w-full h-auto"
               />
               {/* Floating cards */}

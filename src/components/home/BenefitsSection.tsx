@@ -37,7 +37,7 @@ export function BenefitsSection() {
             Why Parents & Students <span className="text-gradient">Love Us</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We've reimagined tutoring for the digital age. Here's what makes AI School different.
+            We've reimagined tutoring for the digital age. Here's what makes Edurance different.
           </p>
         </motion.div>
 

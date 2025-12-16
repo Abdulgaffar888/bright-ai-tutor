@@ -42,7 +42,7 @@ export function DemoSection() {
             See the <span className="text-gradient">Difference</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Watch how AI School adapts the same concept for different age groups. 
+            Watch how Edurance adapts the same concept for different age groups. 
             Personalization that actually works.
           </p>
         </motion.div>
