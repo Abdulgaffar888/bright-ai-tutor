@@ -4,7 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  base: "/bright-ai-tutor/",   // ✅ MUST be here (top-level)
+  // ❌ REMOVE base completely for Vercel
 
   server: {
     host: "::",
