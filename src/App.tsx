@@ -25,7 +25,8 @@ function App() {
 
   // ✅ BACKEND CONNECTION (CORRECT PLACE)
   useEffect(() => {
-    fetch("http://localhost:4000/api/data")
+    fetch(`${import.meta.env.VITE_API_URL}/api/data`)
+
       .then((res) => res.json())
       .then((data) => {
         console.log("Backend connected:", data);
