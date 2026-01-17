@@ -22,7 +22,7 @@ export function CTASection() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/20 text-primary-foreground text-sm font-medium mb-6">
             <Sparkles className="w-4 h-4" />
-            <span>Start your free trial tommorrow</span>
+            <span>Start your free trial today</span>
           </div>
 
           <h2 className="text-3xl lg:text-5xl font-bold text-primary-foreground mb-6">
