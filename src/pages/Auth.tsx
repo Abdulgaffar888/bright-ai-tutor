@@ -164,6 +164,23 @@ const handleSignup = async () => {
                 </div>
               </div>
 
+               <div className="space-y-2">
+                <Label>Mobile Number</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <Input
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    placeholder="you@example.com"
+                    className="pl-10"
+                    required
+                  />
+                </div>
+              </div>
+
               <div className="space-y-2">
                 <Label>Password</Label>
                 <div className="relative">
