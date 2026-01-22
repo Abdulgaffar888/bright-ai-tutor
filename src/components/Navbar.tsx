@@ -46,7 +46,7 @@ export function Navbar() {
 
         <div className="hidden lg:flex items-center gap-3">
           <Button variant="ghost" asChild>
-            <Link to="/auth">Sign In</Link>
+            <Link to="/auth">Sign Up</Link>
           </Button>
           <Button variant="hero" asChild>
             <Link to="/auth?signup=true">Start Free</Link>
