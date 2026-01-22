@@ -253,7 +253,8 @@ const Auth = () => {
                 </>
               ) : (
                 <>
-                  Don&apos;t have an account?{" "}
+                 {"Don't have an account? "}
+
                   <button
                     onClick={() => setIsSignUp(true)}
                     className="text-primary hover:underline"
