@@ -162,10 +162,7 @@ const Auth = () => {
                         onChange={(e) => {
                           const value = e.target.value.replace(/\D/g, "");
                           if (value.length <= 10) {
-                            setFormData({
-                              ...formData,
-                              mobile: value,
-                            });
+                            setFormData({ ...formData, mobile: value });
                           }
                         }}
                         placeholder="9876543210"
@@ -241,6 +238,31 @@ const Auth = () => {
                   : "Sign In"}
               </Button>
             </form>
+
+            {/* ✅ RESTORED TOGGLE LINE */}
+            <p className="text-center text-sm text-muted-foreground mt-6">
+              {isSignUp ? (
+                <>
+                  Already have an account?{" "}
+                  <button
+                    onClick={() => setIsSignUp(false)}
+                    className="text-primary hover:underline"
+                  >
+                    Sign in
+                  </button>
+                </>
+              ) : (
+                <>
+                  Don&apos;t have an account?{" "}
+                  <button
+                    onClick={() => setIsSignUp(true)}
+                    className="text-primary hover:underline"
+                  >
+                    Create one
+                  </button>
+                </>
+              )}
+            </p>
           </motion.div>
         </div>
       </div>
