@@ -9,7 +9,7 @@ import {
   ArrowLeft,
   Eye,
   EyeOff,
-  Phone, // ✅ FIX
+  Phone,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,7 +31,7 @@ const Auth = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    mobile: "", // ✅ FIX
+    mobile: "",
     password: "",
   });
 
@@ -50,7 +50,6 @@ const Auth = () => {
       return;
     }
 
-    // ✅ FIX (mobile added)
     await supabase.from("profiles").insert({
       id: data.user?.id,
       full_name: formData.name,
@@ -129,29 +128,61 @@ const Auth = () => {
 
             <form onSubmit={handleSubmit} className="space-y-5">
               {isSignUp && (
-                <div className="space-y-2">
-                  <Label>Full Name</Label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                    <Input
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                      placeholder="Your full name"
-                      className="pl-10"
-                      required
-                    />
+                <>
+                  {/* Full Name */}
+                  <div className="space-y-2">
+                    <Label>Full Name</Label>
+                    <div className="relative">
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                      <Input
+                        value={formData.name}
+                        onChange={(e) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
+                        placeholder="Your full name"
+                        className="pl-10"
+                        required
+                      />
+                    </div>
                   </div>
-                </div>
+
+                  {/* Mobile Number (India only) */}
+                  <div className="space-y-2">
+                    <Label>Mobile Number</Label>
+                    <div className="relative">
+                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                      <Input
+                        type="tel"
+                        name="mobile"
+                        autoComplete="tel"
+                        inputMode="numeric"
+                        pattern="[6-9][0-9]{9}"
+                        maxLength={10}
+                        value={formData.mobile}
+                        onChange={(e) => {
+                          const value = e.target.value.replace(/\D/g, "");
+                          if (value.length <= 10) {
+                            setFormData({ ...formData, mobile: value });
+                          }
+                        }}
+                        placeholder="9876543210"
+                        className="pl-10"
+                        required
+                      />
+                    </div>
+                  </div>
+                </>
               )}
 
+              {/* Email */}
               <div className="space-y-2">
                 <Label>Email</Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <Input
                     type="email"
+                    name="email"
+                    autoComplete="email"
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
@@ -163,27 +194,7 @@ const Auth = () => {
                 </div>
               </div>
 
-              {/* ✅ FIX: Mobile Number */}
-              <div className="space-y-2">
-                <Label>Mobile Number</Label>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    type="tel" // ✅ FIX
-                    value={formData.mobile} // ✅ FIX
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        mobile: e.target.value, // ✅ FIX
-                      })
-                    }
-                    placeholder="9876543210"
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-
+              {/* Password */}
               <div className="space-y-2">
                 <Label>Password</Label>
                 <div className="relative">
@@ -192,10 +203,7 @@ const Auth = () => {
                     type={showPassword ? "text" : "password"}
                     value={formData.password}
                     onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        password: e.target.value,
-                      })
+                      setFormData({ ...formData, password: e.target.value })
                     }
                     placeholder="••••••••"
                     className="pl-10 pr-10"
@@ -230,6 +238,31 @@ const Auth = () => {
                   : "Sign In"}
               </Button>
             </form>
+
+            {/* ✅ RESTORED TOGGLE LINE */}
+            <p className="text-center text-sm text-muted-foreground mt-6">
+              {isSignUp ? (
+                <>
+                  Already have an account?{" "}
+                  <button
+                    onClick={() => setIsSignUp(false)}
+                    className="text-primary hover:underline"
+                  >
+                    Sign in
+                  </button>
+                </>
+              ) : (
+                <>
+                  Don&apos;t have an account?{" "}
+                  <button
+                    onClick={() => setIsSignUp(true)}
+                    className="text-primary hover:underline"
+                  >
+                    Create one
+                  </button>
+                </>
+              )}
+            </p>
           </motion.div>
         </div>
       </div>

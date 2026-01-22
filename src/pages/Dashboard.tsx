@@ -1,274 +1,209 @@
-import { useState, useEffect } from "react";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   GraduationCap,
-  Mail,
-  Lock,
-  User,
-  ArrowLeft,
-  Eye,
-  EyeOff,
-  Phone,
+  Home,
+  BookOpen,
+  BarChart3,
+  Settings,
+  LogOut,
+  Menu,
+  Play,
+  Clock,
+  Trophy,
+  Target,
+  Sparkles,
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
+import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/utils";
 
+// ✅ CORRECT RELATIVE IMPORT (IMPORTANT)
 import { supabase } from "../lib/supabase";
 
-const Auth = () => {
-  const [searchParams] = useSearchParams();
+/**
+ * FEATURE FLAG
+ */
+const ENABLE_DASHBOARD = false;
+
+const sidebarItems = [
+  { icon: Home, label: "Dashboard", href: "/dashboard", active: true },
+  { icon: BookOpen, label: "My Lessons", href: "/dashboard/lessons" },
+  { icon: BarChart3, label: "Progress", href: "/dashboard/progress" },
+  { icon: Settings, label: "Settings", href: "/dashboard/settings" },
+];
+
+const recentTopics = [
+  { name: "Quadratic Equations", subject: "Mathematics", progress: 75, time: "2h ago" },
+  { name: "Photosynthesis", subject: "Biology", progress: 100, time: "Yesterday" },
+  { name: "French Revolution", subject: "History", progress: 40, time: "2 days ago" },
+];
+
+const recommendedLessons = [
+  { title: "Linear Equations", subject: "Mathematics", duration: "15 min", difficulty: "Medium" },
+  { title: "Cell Structure", subject: "Biology", duration: "20 min", difficulty: "Easy" },
+  { title: "Grammar Basics", subject: "English", duration: "10 min", difficulty: "Easy" },
+];
+
+export default function Dashboard() {
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [fullName, setFullName] = useState<string | null>(null);
 
-  const [isSignUp, setIsSignUp] = useState(
-    searchParams.get("signup") === "true"
-  );
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    mobile: "",
-    password: "",
-  });
-
+  // 🔐 Auth protection
   useEffect(() => {
-    setIsSignUp(searchParams.get("signup") === "true");
-  }, [searchParams]);
-
-  const handleSignup = async () => {
-    const { data, error } = await supabase.auth.signUp({
-      email: formData.email,
-      password: formData.password,
-    });
-
-    if (error) {
-      toast.error(error.message);
-      return;
-    }
-
-    await supabase.from("profiles").insert({
-      id: data.user?.id,
-      full_name: formData.name,
-      mobile: formData.mobile,
-    });
-
-    toast.success("Check your email to verify your account.");
-    setIsSignUp(false);
-  };
-
-  const handleSignin = async () => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email: formData.email,
-      password: formData.password,
-    });
-
-    if (error) {
-      toast.error("Invalid email or password");
-      return;
-    }
-
-    toast.success("Welcome back!");
-    navigate("/dashboard");
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    try {
-      if (isSignUp) {
-        await handleSignup();
-      } else {
-        await handleSignin();
+    supabase.auth.getSession().then(({ data }) => {
+      if (!data.session) {
+        navigate("/auth");
       }
-    } catch {
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
+    });
+  }, [navigate]);
+
+  // 📥 Fetch user profile from database
+  useEffect(() => {
+    supabase.auth.getUser().then(async ({ data }) => {
+      if (!data.user) return;
+
+      const { data: profile, error } = await supabase
+        .from("profiles")
+        .select("full_name")
+        .eq("id", data.user.id)
+        .single();
+
+      if (!error) {
+        setFullName(profile.full_name);
+      }
+    });
+  }, []);
+
+
+  // ✅ LOGOUT
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/auth");
   };
 
   return (
-    <div className="min-h-screen flex">
-      <div className="flex-1 flex flex-col justify-center px-8 lg:px-16 py-12">
-        <div className="max-w-md mx-auto w-full">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to home
-          </Link>
+    <div className="min-h-screen bg-muted/30">
+      {/* Sidebar */}
+      <aside
+        className={cn(
+          "fixed inset-y-0 left-0 z-50 w-64 bg-card border-r border-border transform transition-transform duration-200 ease-in-out lg:translate-x-0",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        <div className="flex flex-col h-full">
+          <div className="flex items-center gap-2 px-6 py-5 border-b border-border">
+            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground">
+              <GraduationCap className="w-6 h-6" />
+            </div>
+            <span className="text-xl font-bold">Edurance</span>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Link to="/" className="flex items-center gap-2 mb-8">
-              <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground">
-                <GraduationCap className="w-6 h-6" />
-              </div>
-              <span className="text-xl font-bold">Edurance</span>
-            </Link>
-
-            <h1 className="text-3xl font-bold mb-2">
-              {isSignUp ? "Create your account" : "Welcome back"}
-            </h1>
-
-            <p className="text-muted-foreground mb-8">
-              {isSignUp
-                ? "Start your free trial with 3 lessons"
-                : "Sign in to continue learning"}
-            </p>
-
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {isSignUp && (
-                <>
-                  {/* Full Name */}
-                  <div className="space-y-2">
-                    <Label>Full Name</Label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                      <Input
-                        value={formData.name}
-                        onChange={(e) =>
-                          setFormData({ ...formData, name: e.target.value })
-                        }
-                        placeholder="Your full name"
-                        className="pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  {/* Mobile Number (India only) */}
-                  <div className="space-y-2">
-                    <Label>Mobile Number</Label>
-                    <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                      <Input
-                        type="tel"
-                        name="mobile"
-                        autoComplete="tel"
-                        inputMode="numeric"
-                        pattern="[6-9][0-9]{9}"
-                        maxLength={10}
-                        value={formData.mobile}
-                        onChange={(e) => {
-                          const value = e.target.value.replace(/\D/g, "");
-                          if (value.length <= 10) {
-                            setFormData({ ...formData, mobile: value });
-                          }
-                        }}
-                        placeholder="9876543210"
-                        className="pl-10"
-                        required
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {/* Email */}
-              <div className="space-y-2">
-                <Label>Email</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    type="email"
-                    name="email"
-                    autoComplete="email"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    placeholder="you@example.com"
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-
-              {/* Password */}
-              <div className="space-y-2">
-                <Label>Password</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    type={showPassword ? "text" : "password"}
-                    value={formData.password}
-                    onChange={(e) =>
-                      setFormData({ ...formData, password: e.target.value })
-                    }
-                    placeholder="••••••••"
-                    className="pl-10 pr-10"
-                    required
-                    minLength={8}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2"
-                  >
-                    {showPassword ? (
-                      <EyeOff className="w-5 h-5" />
-                    ) : (
-                      <Eye className="w-5 h-5" />
+          <nav className="flex-1 px-4 py-6">
+            <ul className="space-y-2">
+              {sidebarItems.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    to={item.href}
+                    className={cn(
+                      "flex items-center gap-3 px-4 py-3 rounded-xl transition-colors",
+                      item.active
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     )}
-                  </button>
-                </div>
-              </div>
-
-              <Button
-                type="submit"
-                variant="hero"
-                size="lg"
-                className="w-full"
-                disabled={isLoading}
-              >
-                {isLoading
-                  ? "Please wait..."
-                  : isSignUp
-                  ? "Create Account"
-                  : "Sign In"}
-              </Button>
-            </form>
-
-            {/* ✅ RESTORED TOGGLE LINE */}
-            <p className="text-center text-sm text-muted-foreground mt-6">
-              {isSignUp ? (
-                <>
-                  Already have an account?{" "}
-                  <button
-                    onClick={() => setIsSignUp(false)}
-                    className="text-primary hover:underline"
                   >
-                    Sign in
-                  </button>
-                </>
-              ) : (
-                <>
-                 {"Don't have an account? "}
+                    <item.icon className="w-5 h-5" />
+                    <span className="font-medium">{item.label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-                  <button
-                    onClick={() => setIsSignUp(true)}
-                    className="text-primary hover:underline"
-                  >
-                    Create one
-                  </button>
-                </>
-              )}
-            </p>
-          </motion.div>
+          <div className="px-4 py-4 border-t border-border">
+            <button
+              onClick={handleLogout}
+              className="flex w-full items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
+            >
+              <LogOut className="w-5 h-5" />
+              <span className="font-medium">Sign Out</span>
+            </button>
+          </div>
         </div>
+      </aside>
+
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-foreground/20 backdrop-blur-sm z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      <main className="lg:ml-64">
+        <header className="sticky top-0 z-30 bg-background/80 backdrop-blur-lg border-b border-border">
+          <div className="flex items-center justify-between px-6 py-4">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="lg:hidden p-2 -ml-2"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+
+           <h1 className="text-xl font-bold">
+  Welcome back{fullName ? `, ${fullName}` : ""}! 👋
+</h1>
+
+
+            <Button variant="hero" size="sm" asChild>
+              <Link to="/dashboard/ask" className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4" />
+                Ask AI Tutor
+              </Link>
+            </Button>
+          </div>
+        </header>
+
+        {ENABLE_DASHBOARD && (
+          <div className="p-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <Stat icon={BookOpen} label="Lessons Completed" value="24" />
+              <Stat icon={Clock} label="Learning Time" value="8.5h" />
+              <Stat icon={Trophy} label="Quiz Accuracy" value="85%" />
+              <Stat icon={Target} label="Day Streak 🔥" value="7" />
+            </div>
+
+            <div className="mt-8 bg-primary text-primary-foreground rounded-2xl p-8 flex justify-between">
+              <div>
+                <h2 className="text-2xl font-bold">Got a doubt?</h2>
+                <p>Ask your AI tutor anytime.</p>
+              </div>
+              <Button variant="secondary" asChild>
+                <Link to="/dashboard/ask">
+                  <Play className="w-5 h-5 mr-2" />
+                  Start Learning
+                </Link>
+              </Button>
+            </div>
+          </div>
+        )}
+      </main>
+    </div>
+  );
+}
+
+function Stat({ icon: Icon, label, value }: any) {
+  return (
+    <div className="bg-card p-6 rounded-2xl shadow-soft flex gap-4">
+      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+        <Icon className="w-6 h-6 text-primary" />
+      </div>
+      <div>
+        <div className="text-2xl font-bold">{value}</div>
+        <div className="text-sm text-muted-foreground">{label}</div>
       </div>
     </div>
   );
-};
-
-export default Auth;
+}
