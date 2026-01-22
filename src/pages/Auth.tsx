@@ -9,13 +9,13 @@ import {
   ArrowLeft,
   Eye,
   EyeOff,
+  Phone, // ✅ FIX
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
-// ✅ CORRECT RELATIVE IMPORT
 import { supabase } from "../lib/supabase";
 
 const Auth = () => {
@@ -31,6 +31,7 @@ const Auth = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    mobile: "", // ✅ FIX
     password: "",
   });
 
@@ -38,29 +39,28 @@ const Auth = () => {
     setIsSignUp(searchParams.get("signup") === "true");
   }, [searchParams]);
 
-const handleSignup = async () => {
-  const { data, error } = await supabase.auth.signUp({
-    email: formData.email,
-    password: formData.password,
-  });
+  const handleSignup = async () => {
+    const { data, error } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+    });
 
-  if (error) {
-    toast.error(error.message);
-    return;
-  }
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
 
-  // ✅ INSERT INTO DATABASE
-  await supabase.from("profiles").insert({
-    id: data.user?.id,
-    full_name: formData.name,
-  });
+    // ✅ FIX (mobile added)
+    await supabase.from("profiles").insert({
+      id: data.user?.id,
+      full_name: formData.name,
+      mobile: formData.mobile,
+    });
 
-  toast.success("Check your email to verify your account.");
-  setIsSignUp(false);
-};
+    toast.success("Check your email to verify your account.");
+    setIsSignUp(false);
+  };
 
-
-  // ✅ SIGN IN
   const handleSignin = async () => {
     const { error } = await supabase.auth.signInWithPassword({
       email: formData.email,
@@ -76,7 +76,6 @@ const handleSignup = async () => {
     navigate("/dashboard");
   };
 
-  // ✅ FORM SUBMIT
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -164,17 +163,21 @@ const handleSignup = async () => {
                 </div>
               </div>
 
-               <div className="space-y-2">
+              {/* ✅ FIX: Mobile Number */}
+              <div className="space-y-2">
                 <Label>Mobile Number</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <Input
-                    type="email"
-                    value={formData.email}
+                    type="tel" // ✅ FIX
+                    value={formData.mobile} // ✅ FIX
                     onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
+                      setFormData({
+                        ...formData,
+                        mobile: e.target.value, // ✅ FIX
+                      })
                     }
-                    placeholder="you@example.com"
+                    placeholder="9876543210"
                     className="pl-10"
                     required
                   />
@@ -189,7 +192,10 @@ const handleSignup = async () => {
                     type={showPassword ? "text" : "password"}
                     value={formData.password}
                     onChange={(e) =>
-                      setFormData({ ...formData, password: e.target.value })
+                      setFormData({
+                        ...formData,
+                        password: e.target.value,
+                      })
                     }
                     placeholder="••••••••"
                     className="pl-10 pr-10"
@@ -224,30 +230,6 @@ const handleSignup = async () => {
                   : "Sign In"}
               </Button>
             </form>
-
-            <p className="text-center text-sm text-muted-foreground mt-6">
-              {isSignUp ? (
-                <>
-                  Already have an account?{" "}
-                  <button
-                    onClick={() => setIsSignUp(false)}
-                    className="text-primary hover:underline"
-                  >
-                    Sign in
-                  </button>
-                </>
-              ) : (
-                <>
-                  Don't have an account?{" "}
-                  <button
-                    onClick={() => setIsSignUp(true)}
-                    className="text-primary hover:underline"
-                  >
-                    Create one
-                  </button>
-                </>
-              )}
-            </p>
           </motion.div>
         </div>
       </div>
