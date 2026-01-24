@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
-import { GraduationCap, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import {
+  GraduationCap,
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+  Twitter,
+  Instagram,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -31,10 +39,9 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Twitter, href: "#", label: "X (Twitter)" },
   { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube, href: "#", label: "YouTube" },
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
 ];
 
 export function Footer() {
