@@ -25,7 +25,7 @@ const Privacy = () => (
 
     <h2 className="font-semibold mt-6 mb-2">Contact</h2>
     <p>
-      For privacy concerns, contact us at support@edurance.com
+      For privacy concerns, contact us at eduranceai7@gmail.com
     </p>
   </div>
 );

@@ -38,7 +38,7 @@ export function CTASection() {
               className="font-bold"
             >
               <Link to="/auth?signup=true" className="flex items-center gap-2">
-                Start 3 Free Lessons
+                Start Free Lessons
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </Button>

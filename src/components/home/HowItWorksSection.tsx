@@ -5,20 +5,20 @@ const steps = [
   {
     icon: MessageSquare,
     step: "01",
-    title: "Ask a Question",
-    description: "Type or speak your doubt in any subject. From math problems to science concepts, history to languages.",
+    title: "Assessment Test",
+    description: "The student takes a short assessment based on their grade to check what they already know and where they are struggling.",
   },
   {
     icon: Zap,
     step: "02",
-    title: "AI Generates a Lesson",
-    description: "In just 30 seconds, get a personalized lesson with explanations, visuals, and examples tailored to your grade.",
+    title: "AI Tutor Teaches Weak Areas",
+    description: "Based on the assessment, an AI tutor focuses only on the topics the student is weak in, explaining concepts step by step like a personal teacher.",
   },
   {
     icon: Trophy,
     step: "03",
-    title: "Practice with Quizzes",
-    description: "Reinforce your learning with interactive quizzes. Track your progress and master every topic.",
+    title: "Track Learning Progress",
+    description: "After each session, Edurance tracks what the student has learned, how much progress they’ve made, and what they need to study next.",
   },
 ];
 

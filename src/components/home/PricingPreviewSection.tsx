@@ -15,7 +15,7 @@ const plans = [
       "Grade 1-12 coverage",
       "Text-based explanations",
     ],
-    cta: "Start Free",
+    cta: "Sign Up",
     highlighted: false,
   },
   {

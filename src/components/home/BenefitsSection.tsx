@@ -11,12 +11,12 @@ const benefits = [
   {
     icon: Clock,
     title: "24/7 Instant Doubt Solving",
-    description: "Stuck at 11 PM before an exam? Get instant, accurate answers anytime, anywhere. Like having a tutor on call.",
+    description: "Never Sleep on a Doubt Again. Whether it's 11 PM or 6 AM, Edurance doesn't just give answers—it explains the 'Why' behind every concept until your child truly gets it",
     color: "accent",
   },
   {
     icon: Sparkles,
-    title: "Fun, Visual Explanations",
+    title: "Fun,Simple Explanations",
     description: "Complex concepts broken down with animations, diagrams, and real-world examples that make learning enjoyable.",
     color: "primary",
   },
