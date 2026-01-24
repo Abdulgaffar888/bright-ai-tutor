@@ -161,7 +161,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row gap-6 py-8 border-t border-background/10">
           <div className="flex items-center gap-2 text-sm text-background/70">
             <Mail className="w-4 h-4" />
-            <span>support@Edurance.com</span>
+            <span>Eduranceai7@gmail.com</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-background/70">
             <Phone className="w-4 h-4" />
