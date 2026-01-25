@@ -33,21 +33,21 @@ export function HeroSection() {
             </h1>
 
             <p className="text-lg lg:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0">
-              Instant, simple, visual lessons — made for your child's grade level. 
+              Instant, simple lessons — made for your child's grade level. 
               24/7 doubt solving that feels like talking to the best teacher.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button variant="hero" size="xl" asChild>
                 <Link to="/auth?signup=true">
-                  Start 3 Free Lessons
+                  Try Now
                 </Link>
               </Button>
               <Button variant="hero-outline" size="xl" asChild>
-                <Link to="/#demo" className="flex items-center gap-2">
+                {/* <Link to="/#demo" className="flex items-center gap-2">
                   <Play className="w-5 h-5" />
                   Watch Demo
-                </Link>
+                </Link> */}
               </Button>
             </div>
 

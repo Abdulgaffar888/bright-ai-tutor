@@ -27,7 +27,7 @@ const plans = [
       { name: "Parent dashboard", included: false },
       { name: "Priority support", included: false },
     ],
-    cta: "Start Free",
+    cta: "Sign Up",
     highlighted: false,
   },
   {

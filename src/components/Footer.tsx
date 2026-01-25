@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
-import { GraduationCap, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import {
+  GraduationCap,
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+  Twitter,
+  Instagram,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -31,10 +39,9 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube, href: "#", label: "YouTube" },
+  { icon: Twitter, href: "https://x.com/eduranceai7", label: "X (Twitter)" },
+  { icon: Instagram, href: "https://www.instagram.com/edurance.ai?igsh=emVpOTh2b3o2anAw", label: "Instagram" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/edurance-ai-8573203a8", label: "LinkedIn" },
 ];
 
 export function Footer() {

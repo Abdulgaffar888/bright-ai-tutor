@@ -18,7 +18,7 @@ const Refund = () => (
 
     <h2 className="font-semibold mt-6 mb-2">Contact</h2>
     <p>
-      For refund requests, email support@edurance.com within 7 days.
+      For refund requests, email eduranceai7@gmail.com within 7 days.
     </p>
   </div>
 );

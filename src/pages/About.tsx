@@ -5,28 +5,20 @@ import { Target, Heart, Globe, Award } from "lucide-react";
 
 const team = [
   {
-    name: "Arjun Mehta",
+    name: "Ibrahim Hassan",
     role: "Co-Founder & CEO",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-    bio: "Former Google engineer, passionate about democratizing education.",
   },
   {
-    name: "Sneha Kapoor",
+    name: "Rahil Nisar",
     role: "Co-Founder & CTO",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&crop=face",
-    bio: "AI researcher from IIT Delhi, building the future of learning.",
   },
   {
-    name: "Vikram Singh",
-    role: "Head of Education",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=300&fit=crop&crop=face",
-    bio: "20 years of teaching experience, curriculum design expert.",
+    name: "Abdul Gaffar",
+    role: "Co-Founder & COO",
   },
   {
-    name: "Priya Sharma",
-    role: "Head of Product",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&h=300&fit=crop&crop=face",
-    bio: "Previously at Byju's, focused on student-first design.",
+    name: "Abdul Shakoor Kamran",
+    role: "Co-Founder & Head Of Product",
   },
 ];
 
@@ -201,13 +193,13 @@ const About = () => {
                   className="bg-card rounded-2xl p-6 text-center shadow-card"
                 >
                   <img
-                    src={member.image}
+                    
                     alt={member.name}
                     className="w-24 h-24 rounded-full object-cover mx-auto mb-4"
                   />
                   <h3 className="text-lg font-bold">{member.name}</h3>
                   <p className="text-sm text-primary font-medium mb-2">{member.role}</p>
-                  <p className="text-sm text-muted-foreground">{member.bio}</p>
+                  
                 </motion.div>
               ))}
             </div>

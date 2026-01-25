@@ -103,7 +103,6 @@ const Product = () => {
                 Powerful <span className="text-gradient">Features</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Built by educators and AI experts to deliver the most effective learning experience.
               </p>
             </motion.div>
 
@@ -248,7 +247,7 @@ const Product = () => {
               Experience the Future of Learning
             </h2>
             <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-              Start with 3 free lessons and see the difference for yourself.
+              Start with free lessons and see the difference for yourself.
             </p>
             <Button variant="secondary" size="xl" asChild>
               <Link to="/auth?signup=true">Get Started Free</Link>
