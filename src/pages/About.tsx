@@ -3,10 +3,10 @@ import { Footer } from "@/components/Footer";
 import { motion } from "framer-motion";
 import { Target, Heart, Globe, Award } from "lucide-react";
 
-import ibrahim from "@/assets/team/Ibrahim.jpeg";
-import rahil from "@/assets/team/Rahil.jpeg";
-import gaffar from "@/assets/team/Gaffar.jpeg";
-import kamran from "@/assets/team/Kamran.jpeg";
+import ibrahim from "@/assets/Team/Ibrahim.jpeg";
+import rahil from "@/assets/Team/Rahil.jpeg";
+import gaffar from "@/assets/Team/Gaffar.jpeg";
+import kamran from "@/assets/Team/Kamran.jpeg";
 
 const team = [
   {
