@@ -1,9 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X, GraduationCap } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+
+// ✅ import your logo image
+import Logo from "@/assets/logo.png";
 
 const navigation = [
   { name: "Product", href: "/product" },
@@ -19,11 +22,17 @@ export function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
       <nav className="container flex items-center justify-between h-16 lg:h-20">
+        
+        {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-primary-foreground">
-            <GraduationCap className="w-6 h-6" />
-          </div>
-          <span className="text-xl font-bold text-foreground">Edurance</span>
+          <img
+            src={Logo}
+            alt="Edurance Logo"
+            className="w-10 h-10 object-contain"
+          />
+          <span className="text-xl font-bold text-foreground">
+            Edurance
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -44,7 +53,7 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap--3">
           <Button variant="ghost" asChild>
             <Link to="/auth">Sign Up</Link>
           </Button>
@@ -59,7 +68,11 @@ export function Navbar() {
           className="lg:hidden p-2 text-foreground"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {mobileMenuOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
         </button>
       </nav>
 
@@ -88,6 +101,7 @@ export function Navbar() {
                   {item.name}
                 </Link>
               ))}
+
               <div className="flex flex-col gap-2 pt-4 border-t border-border">
                 <Button variant="outline" asChild className="w-full">
                   <Link to="/auth">Sign In</Link>
