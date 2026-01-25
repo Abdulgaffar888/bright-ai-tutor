@@ -5,9 +5,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
-// ✅ import your logo image
-import Logo from "@/assets/logo.png";
-
 const navigation = [
   { name: "Product", href: "/product" },
   { name: "Pricing", href: "/pricing" },
@@ -23,16 +20,9 @@ export function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
       <nav className="container flex items-center justify-between h-16 lg:h-20">
         
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <img
-            src={Logo}
-            alt="Edurance Logo"
-            className="w-10 h-10 object-contain"
-          />
-          <span className="text-xl font-bold text-foreground">
-            Edurance
-          </span>
+        {/* Text-only Logo */}
+        <Link to="/" className="text-xl font-bold text-foreground">
+          Edurance
         </Link>
 
         {/* Desktop Navigation */}
@@ -53,7 +43,8 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="hidden lg:flex items-center gap--3">
+        {/* Desktop Buttons */}
+        <div className="hidden lg:flex items-center gap-3">
           <Button variant="ghost" asChild>
             <Link to="/auth">Sign Up</Link>
           </Button>
