@@ -1,61 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Favicon --><!-- Favicons -->
-    <!-- Favicon (Google-safe & stable) -->
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-
-    <link rel="icon" type="image/png" href="/favicon.png" />
-
-    <!-- Basic Meta -->
+    <!-- BASIC META -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href="https://www.edurance.in/" />
 
-    <!-- Title & Description -->
+    <!-- TITLE -->
     <title>Edurance – AI Tutor for Students | Personalized Learning</title>
     <meta
       name="description"
       content="Edurance is an AI-powered tutor for students offering personalized learning, smart explanations, and step-by-step guidance."
     />
 
-    <!-- Keywords -->
-    <meta
-      name="keywords"
-      content="Edurance, AI tutor for students, AI education platform, personalized learning, online AI tutor, edtech startup"
-    />
+    <!-- FAVICONS (GOOGLE SAFE) -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- Author -->
-    <meta name="author" content="Edurance Team" />
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
 
-    <!-- Open Graph -->
+    <!-- OPEN GRAPH -->
     <meta property="og:title" content="Edurance – AI Tutor for Students" />
     <meta
       property="og:description"
       content="Edurance is an AI-powered tutor helping students learn smarter with personalized guidance."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://www.edurance.in/seo-image.png" />
     <meta property="og:url" content="https://www.edurance.in/" />
+    <meta property="og:image" content="https://www.edurance.in/seo-image.png" />
 
-    <!-- Twitter -->
+    <!-- TWITTER -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Edurance" />
-    <meta
-      name="twitter:title"
-      content="Edurance - Personal AI Tutor for Every Student"
-    />
-    <meta
-      name="twitter:description"
-      content="Instant, simple, visual lessons made for your child's grade level. 24/7 doubt solving."
-    />
     <meta name="twitter:image" content="https://www.edurance.in/seo-image.png" />
 
-    <!-- Google Analytics -->
+    <!-- GOOGLE ANALYTICS -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-6VR970E1YV"
@@ -65,28 +46,25 @@
       function gtag() {
         dataLayer.push(arguments);
       }
-      window.gtag = gtag;
       gtag("js", new Date());
       gtag("config", "G-6VR970E1YV");
     </script>
   </head>
 
   <body>
-    <!-- React Mount -->
     <div id="root"></div>
 
-    <!-- Organization Schema (SEO SAFE) -->
+    <!-- ORGANIZATION SCHEMA (FIXED) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "Edurance",
         "url": "https://www.edurance.in",
-        "logo": "https://www.edurance.in/favicon.png"
+        "logo": "https://www.edurance.in/seo-image.png"
       }
     </script>
 
-    <!-- React App Entry (DO NOT TOUCH) -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
