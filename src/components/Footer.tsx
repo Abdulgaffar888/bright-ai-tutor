@@ -20,15 +20,15 @@ const footerLinks = {
   ],
   company: [
     { name: "About Us", href: "/about" },
-    { name: "Careers", href: "/careers" },
-    { name: "Blog", href: "/blog" },
-    { name: "Press", href: "/press" },
+    { name: "Careers", disabled: true },
+    { name: "Blog", disabled: true },
+    { name: "Press", disabled: true },
   ],
   support: [
-    { name: "Help Center", href: "/help" },
+    { name: "Help Center", disabled: true },
     { name: "Contact Us", href: "/contact" },
     { name: "FAQ", href: "/contact#faq" },
-    { name: "Community", href: "/community" },
+    { name: "Community", disabled: true },
   ],
   legal: [
     { name: "Terms of Service", href: "/terms" },
@@ -40,8 +40,16 @@ const footerLinks = {
 
 const socialLinks = [
   { icon: Twitter, href: "https://x.com/eduranceai7", label: "X (Twitter)" },
-  { icon: Instagram, href: "https://www.instagram.com/edurance.in?utm_source=qr&igsh=NDdodHZoYXV4ODJi", label: "Instagram" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/edurance-ai-8573203a8", label: "LinkedIn" },
+  {
+    icon: Instagram,
+    href: "https://www.instagram.com/edurance.in?utm_source=qr&igsh=NDdodHZoYXV4ODJi",
+    label: "Instagram",
+  },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/edurance-ai-8573203a8",
+    label: "LinkedIn",
+  },
 ];
 
 export function Footer() {
@@ -53,7 +61,8 @@ export function Footer() {
           <div className="max-w-md">
             <h3 className="text-2xl font-bold mb-2">Stay Updated</h3>
             <p className="text-background/70">
-              Get the latest tips, updates, and educational resources delivered to your inbox.
+              Get the latest tips, updates, and educational resources delivered
+              to your inbox.
             </p>
           </div>
           <form className="flex w-full lg:w-auto gap-3">
@@ -79,7 +88,8 @@ export function Footer() {
               <span className="text-xl font-bold">Edurance</span>
             </Link>
             <p className="text-background/70 text-sm mb-6">
-              Making world-class tutoring accessible to every child through AI-powered personalized education.
+              Making world-class tutoring accessible to every child through
+              AI-powered personalized education.
             </p>
             <div className="flex gap-4">
               {socialLinks.map((social) => (
@@ -95,73 +105,17 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Product Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Product</h4>
-            <ul className="space-y-3">
-              {footerLinks.product.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-background/70 hover:text-background transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Product */}
+          <FooterColumn title="Product" links={footerLinks.product} />
 
-          {/* Company Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-background/70 hover:text-background transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Company */}
+          <FooterColumn title="Company" links={footerLinks.company} />
 
-          {/* Support Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Support</h4>
-            <ul className="space-y-3">
-              {footerLinks.support.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-background/70 hover:text-background transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Support */}
+          <FooterColumn title="Support" links={footerLinks.support} />
 
-          {/* Legal Links */}
-          <div>
-            <h4 className="font-semibold mb-4">Legal</h4>
-            <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-background/70 hover:text-background transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Legal */}
+          <FooterColumn title="Legal" links={footerLinks.legal} />
         </div>
 
         {/* Contact Info */}
@@ -186,5 +140,41 @@ export function Footer() {
         </div>
       </div>
     </footer>
+  );
+}
+
+/* 🔹 Reusable Footer Column */
+function FooterColumn({
+  title,
+  links,
+}: {
+  title: string;
+  links: { name: string; href?: string; disabled?: boolean }[];
+}) {
+  return (
+    <div>
+      <h4 className="font-semibold mb-4">{title}</h4>
+      <ul className="space-y-3">
+        {links.map((link) => (
+          <li key={link.name}>
+            {link.disabled ? (
+              <span
+                title="Coming soon"
+                className="text-sm text-background/40 cursor-not-allowed"
+              >
+                {link.name}
+              </span>
+            ) : (
+              <Link
+                to={link.href!}
+                className="text-sm text-background/70 hover:text-background transition-colors"
+              >
+                {link.name}
+              </Link>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
