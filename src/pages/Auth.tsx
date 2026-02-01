@@ -22,11 +22,15 @@ const Auth = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
+  const isResetMode = searchParams.get("reset") === "true";
+
   const [isSignUp, setIsSignUp] = useState(
     searchParams.get("signup") === "true"
   );
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [newPassword, setNewPassword] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -39,7 +43,7 @@ const Auth = () => {
     setIsSignUp(searchParams.get("signup") === "true");
   }, [searchParams]);
 
-  // 🔹 GOOGLE SIGN IN (STEP 3)
+  // 🔹 GOOGLE SIGN IN
   const signInWithGoogle = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
@@ -48,9 +52,49 @@ const Auth = () => {
       },
     });
 
+    if (error) toast.error(error.message);
+  };
+
+  // 🔹 FORGOT PASSWORD
+  const handleForgotPassword = async () => {
+    if (!formData.email) {
+      toast.error("Please enter your email first");
+      return;
+    }
+
+    const { error } = await supabase.auth.resetPasswordForEmail(
+      formData.email,
+      {
+        redirectTo: `${window.location.origin}/auth?reset=true`,
+      }
+    );
+
     if (error) {
       toast.error(error.message);
+      return;
     }
+
+    toast.success("Password reset link sent to your email");
+  };
+
+  // 🔹 UPDATE PASSWORD (RESET FLOW)
+  const handleUpdatePassword = async () => {
+    if (newPassword.length < 8) {
+      toast.error("Password must be at least 8 characters");
+      return;
+    }
+
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+    toast.success("Password updated successfully");
+    navigate("/dashboard");
   };
 
   const handleSignup = async () => {
@@ -130,152 +174,118 @@ const Auth = () => {
               <span className="text-xl font-bold">Edurance</span>
             </Link>
 
-            <h1 className="text-3xl font-bold mb-2">
-              {isSignUp ? "Create your account" : "Welcome back"}
-            </h1>
+            {isResetMode ? (
+              <>
+                <h1 className="text-3xl font-bold mb-6">
+                  Set new password
+                </h1>
 
-            <p className="text-muted-foreground mb-8">
-              {isSignUp
-                ? "Start your free trial with 3 lessons"
-                : "Sign in to continue learning"}
-            </p>
+                <div className="space-y-4">
+                  <Label>New Password</Label>
+                  <Input
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="Enter new password"
+                  />
 
-            {/* 🔹 GOOGLE BUTTON */}
-            <button
-              onClick={signInWithGoogle}
-              className="w-full mb-4 flex items-center justify-center gap-2 border rounded-xl py-2 hover:bg-muted"
-            >
-              <img src="/google.svg" className="w-5 h-5" />
-              Continue with Google
-            </button>
+                  <Button
+                    onClick={handleUpdatePassword}
+                    variant="hero"
+                    className="w-full"
+                  >
+                    Update Password
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <>
+                <h1 className="text-3xl font-bold mb-2">
+                  {isSignUp ? "Create your account" : "Welcome back"}
+                </h1>
 
-            <div className="text-center text-sm text-muted-foreground mb-4">
-              or
-            </div>
+                <p className="text-muted-foreground mb-8">
+                  {isSignUp
+                    ? "Start your free trial with 3 lessons"
+                    : "Sign in to continue learning"}
+                </p>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {isSignUp && (
-                <>
-                  <div className="space-y-2">
-                    <Label>Full Name</Label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <button
+                  onClick={signInWithGoogle}
+                  className="w-full mb-4 flex items-center justify-center gap-2 border rounded-xl py-2 hover:bg-muted"
+                >
+                  <img src="/google.svg" className="w-5 h-5" />
+                  Continue with Google
+                </button>
+
+                <div className="text-center text-sm text-muted-foreground mb-4">
+                  or
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {isSignUp && (
+                    <>
                       <Input
+                        placeholder="Full name"
                         value={formData.name}
                         onChange={(e) =>
                           setFormData({ ...formData, name: e.target.value })
                         }
-                        placeholder="Your full name"
-                        className="pl-10"
                         required
                       />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label>Mobile Number</Label>
-                    <div className="relative">
-                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                       <Input
-                        type="tel"
-                        inputMode="numeric"
-                        pattern="[6-9][0-9]{9}"
-                        maxLength={10}
+                        placeholder="Mobile number"
                         value={formData.mobile}
                         onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            mobile: e.target.value.replace(/\D/g, ""),
-                          })
+                          setFormData({ ...formData, mobile: e.target.value })
                         }
-                        placeholder="9876543210"
-                        className="pl-10"
                         required
                       />
-                    </div>
-                  </div>
-                </>
-              )}
+                    </>
+                  )}
 
-              <div className="space-y-2">
-                <Label>Email</Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <Input
-                    type="email"
+                    placeholder="Email"
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    placeholder="you@example.com"
-                    className="pl-10"
                     required
                   />
-                </div>
-              </div>
 
-              <div className="space-y-2">
-                <Label>Password</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <Input
-                    type={showPassword ? "text" : "password"}
+                    type="password"
+                    placeholder="Password"
                     value={formData.password}
                     onChange={(e) =>
                       setFormData({ ...formData, password: e.target.value })
                     }
-                    className="pl-10 pr-10"
                     required
-                    minLength={8}
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2"
-                  >
-                    {showPassword ? <EyeOff /> : <Eye />}
-                  </button>
-                </div>
-              </div>
 
-              <Button
-                type="submit"
-                variant="hero"
-                size="lg"
-                className="w-full"
-                disabled={isLoading}
-              >
-                {isLoading
-                  ? "Please wait..."
-                  : isSignUp
-                  ? "Create Account"
-                  : "Sign In"}
-              </Button>
-            </form>
+                  {!isSignUp && (
+                    <div className="text-right">
+                      <button
+                        type="button"
+                        onClick={handleForgotPassword}
+                        className="text-sm text-primary hover:underline"
+                      >
+                        Forgot password?
+                      </button>
+                    </div>
+                  )}
 
-            <p className="text-center text-sm text-muted-foreground mt-6">
-              {isSignUp ? (
-                <>
-                  Already have an account?{" "}
-                  <button
-                    onClick={() => setIsSignUp(false)}
-                    className="text-primary hover:underline"
+                  <Button
+                    type="submit"
+                    variant="hero"
+                    className="w-full"
+                    disabled={isLoading}
                   >
-                    Sign in
-                  </button>
-                </>
-              ) : (
-                <>
-                  Don&apos;t have an account?{" "}
-                  <button
-                    onClick={() => setIsSignUp(true)}
-                    className="text-primary hover:underline"
-                  >
-                    Create one
-                  </button>
-                </>
-              )}
-            </p>
+                    {isSignUp ? "Create Account" : "Sign In"}
+                  </Button>
+                </form>
+              </>
+            )}
           </motion.div>
         </div>
       </div>
