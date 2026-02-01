@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import { supabase } from "@/lib/supabase";
 import AnalyticsTracker from "@/lib/AnalyticsTracker";
 
 import Index from "./pages/Index";
@@ -23,12 +24,17 @@ import Refund from "./pages/legal/Refund";
 const queryClient = new QueryClient();
 
 function App() {
-  // Backend connection check
+  // 🔐 SESSION PERSISTENCE (STEP 4)
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/data`)
-      .then((res) => res.json())
-      .then((data) => console.log("Backend connected:", data))
-      .catch((err) => console.error("Backend error:", err));
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        console.log("Session restored:", session.user.id);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   return (
@@ -37,7 +43,6 @@ function App() {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          {/* ✅ Google Analytics SPA Tracker */}
           <AnalyticsTracker />
 
           <Routes>

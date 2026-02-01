@@ -39,6 +39,20 @@ const Auth = () => {
     setIsSignUp(searchParams.get("signup") === "true");
   }, [searchParams]);
 
+  // 🔹 GOOGLE SIGN IN (STEP 3)
+  const signInWithGoogle = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`,
+      },
+    });
+
+    if (error) {
+      toast.error(error.message);
+    }
+  };
+
   const handleSignup = async () => {
     const { data, error } = await supabase.auth.signUp({
       email: formData.email,
@@ -126,10 +140,22 @@ const Auth = () => {
                 : "Sign in to continue learning"}
             </p>
 
+            {/* 🔹 GOOGLE BUTTON */}
+            <button
+              onClick={signInWithGoogle}
+              className="w-full mb-4 flex items-center justify-center gap-2 border rounded-xl py-2 hover:bg-muted"
+            >
+              <img src="/google.svg" className="w-5 h-5" />
+              Continue with Google
+            </button>
+
+            <div className="text-center text-sm text-muted-foreground mb-4">
+              or
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-5">
               {isSignUp && (
                 <>
-                  {/* Full Name */}
                   <div className="space-y-2">
                     <Label>Full Name</Label>
                     <div className="relative">
@@ -146,25 +172,22 @@ const Auth = () => {
                     </div>
                   </div>
 
-                  {/* Mobile Number (India only) */}
                   <div className="space-y-2">
                     <Label>Mobile Number</Label>
                     <div className="relative">
                       <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                       <Input
                         type="tel"
-                        name="mobile"
-                        autoComplete="tel"
                         inputMode="numeric"
                         pattern="[6-9][0-9]{9}"
                         maxLength={10}
                         value={formData.mobile}
-                        onChange={(e) => {
-                          const value = e.target.value.replace(/\D/g, "");
-                          if (value.length <= 10) {
-                            setFormData({ ...formData, mobile: value });
-                          }
-                        }}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            mobile: e.target.value.replace(/\D/g, ""),
+                          })
+                        }
                         placeholder="9876543210"
                         className="pl-10"
                         required
@@ -174,15 +197,12 @@ const Auth = () => {
                 </>
               )}
 
-              {/* Email */}
               <div className="space-y-2">
                 <Label>Email</Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <Input
                     type="email"
-                    name="email"
-                    autoComplete="email"
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
@@ -194,7 +214,6 @@ const Auth = () => {
                 </div>
               </div>
 
-              {/* Password */}
               <div className="space-y-2">
                 <Label>Password</Label>
                 <div className="relative">
@@ -205,7 +224,6 @@ const Auth = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, password: e.target.value })
                     }
-                    placeholder="••••••••"
                     className="pl-10 pr-10"
                     required
                     minLength={8}
@@ -215,11 +233,7 @@ const Auth = () => {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2"
                   >
-                    {showPassword ? (
-                      <EyeOff className="w-5 h-5" />
-                    ) : (
-                      <Eye className="w-5 h-5" />
-                    )}
+                    {showPassword ? <EyeOff /> : <Eye />}
                   </button>
                 </div>
               </div>
@@ -239,7 +253,6 @@ const Auth = () => {
               </Button>
             </form>
 
-            {/* ✅ RESTORED TOGGLE LINE */}
             <p className="text-center text-sm text-muted-foreground mt-6">
               {isSignUp ? (
                 <>
