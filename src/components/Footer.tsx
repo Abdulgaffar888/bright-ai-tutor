@@ -40,7 +40,7 @@ const footerLinks = {
 
 const socialLinks = [
   { icon: Twitter, href: "https://x.com/eduranceai7", label: "X (Twitter)" },
-  { icon: Instagram, href: "https://www.instagram.com/edurance.ai?igsh=emVpOTh2b3o2anAw", label: "Instagram" },
+  { icon: Instagram, href: "https://www.instagram.com/edurance.in?utm_source=qr&igsh=NDdodHZoYXV4ODJi", label: "Instagram" },
   { icon: Linkedin, href: "https://www.linkedin.com/in/edurance-ai-8573203a8", label: "LinkedIn" },
 ];
 
