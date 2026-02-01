@@ -14,7 +14,7 @@ import {
   Trophy,
   Target,
   Sparkles,
-  ChevronRight,
+  ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -33,18 +33,6 @@ const sidebarItems = [
   { icon: BookOpen, label: "My Lessons", href: "/dashboard/lessons" },
   { icon: BarChart3, label: "Progress", href: "/dashboard/progress" },
   { icon: Settings, label: "Settings", href: "/dashboard/settings" },
-];
-
-const recentTopics = [
-  { name: "Quadratic Equations", subject: "Mathematics", progress: 75, time: "2h ago" },
-  { name: "Photosynthesis", subject: "Biology", progress: 100, time: "Yesterday" },
-  { name: "French Revolution", subject: "History", progress: 40, time: "2 days ago" },
-];
-
-const recommendedLessons = [
-  { title: "Linear Equations", subject: "Mathematics", duration: "15 min", difficulty: "Medium" },
-  { title: "Cell Structure", subject: "Biology", duration: "20 min", difficulty: "Easy" },
-  { title: "Grammar Basics", subject: "English", duration: "10 min", difficulty: "Easy" },
 ];
 
 export default function Dashboard() {
@@ -77,7 +65,6 @@ export default function Dashboard() {
       }
     });
   }, []);
-
 
   // ✅ LOGOUT
   const handleLogout = async () => {
@@ -152,10 +139,9 @@ export default function Dashboard() {
               <Menu className="w-6 h-6" />
             </button>
 
-           <h1 className="text-xl font-bold">
-  Welcome back{fullName ? `, ${fullName}` : ""}! 👋
-</h1>
-
+            <h1 className="text-xl font-bold">
+              Welcome back{fullName ? `, ${fullName}` : ""}! 👋
+            </h1>
 
             <Button variant="hero" size="sm" asChild>
               <Link to="/dashboard/ask" className="flex items-center gap-2">
@@ -166,44 +152,31 @@ export default function Dashboard() {
           </div>
         </header>
 
-        {ENABLE_DASHBOARD && (
-          <div className="p-6">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              <Stat icon={BookOpen} label="Lessons Completed" value="24" />
-              <Stat icon={Clock} label="Learning Time" value="8.5h" />
-              <Stat icon={Trophy} label="Quiz Accuracy" value="85%" />
-              <Stat icon={Target} label="Day Streak 🔥" value="7" />
-            </div>
+        {/* ✅ FALLBACK DASHBOARD (WHEN FEATURE FLAG IS OFF) */}
+        {!ENABLE_DASHBOARD && (
+          <div className="p-10 flex justify-center">
+            <div className="max-w-xl w-full bg-card rounded-2xl border border-border p-8 text-center shadow-soft">
+              <h2 className="text-2xl font-bold mb-2">
+                Your AI Learning Hub 🚀
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                Access your AI-powered tutor and start learning smarter with
+                Edurance.
+              </p>
 
-            <div className="mt-8 bg-primary text-primary-foreground rounded-2xl p-8 flex justify-between">
-              <div>
-                <h2 className="text-2xl font-bold">Got a doubt?</h2>
-                <p>Ask your AI tutor anytime.</p>
-              </div>
-              <Button variant="secondary" asChild>
-                <Link to="/dashboard/ask">
-                  <Play className="w-5 h-5 mr-2" />
-                  Start Learning
-                </Link>
-              </Button>
+              <a
+                href="https://y-zeta-virid.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition"
+              >
+                Launch AI Tutor
+                <ExternalLink className="w-4 h-4" />
+              </a>
             </div>
           </div>
         )}
       </main>
-    </div>
-  );
-}
-
-function Stat({ icon: Icon, label, value }: any) {
-  return (
-    <div className="bg-card p-6 rounded-2xl shadow-soft flex gap-4">
-      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-        <Icon className="w-6 h-6 text-primary" />
-      </div>
-      <div>
-        <div className="text-2xl font-bold">{value}</div>
-        <div className="text-sm text-muted-foreground">{label}</div>
-      </div>
     </div>
   );
 }
