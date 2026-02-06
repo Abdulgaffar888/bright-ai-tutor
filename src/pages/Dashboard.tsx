@@ -31,7 +31,7 @@ export default function Dashboard() {
             <h1 className="text-2xl sm:text-3xl font-semibold text-white mb-4">
               Learn like you’re sitting  
               <span className="block text-cyan-300 mt-1">
-                with a real teacher.
+                with Aristotle.
               </span>
             </h1>
 
