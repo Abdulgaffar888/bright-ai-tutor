@@ -3,7 +3,7 @@ import { ExternalLink, GraduationCap } from "lucide-react";
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0A0A15] px-6 overflow-hidden">
+    <div className="fixed inset-0 overflow-hidden bg-[#0A0A15] flex items-center justify-center px-6">
       {/* Background Aurora */}
       <div className="absolute inset-0">
         <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-violet-500/30 rounded-full blur-[160px]" />
