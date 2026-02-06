@@ -9,18 +9,11 @@ import {
   Settings,
   LogOut,
   Menu,
-  Play,
-  Clock,
-  Trophy,
-  Target,
   Sparkles,
   ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-
-// ✅ CORRECT RELATIVE IMPORT (IMPORTANT)
 import { supabase } from "../lib/supabase";
 
 /**
@@ -49,24 +42,23 @@ export default function Dashboard() {
     });
   }, [navigate]);
 
-  // 📥 Fetch user profile from database
+  // 📥 Fetch user profile
   useEffect(() => {
     supabase.auth.getUser().then(async ({ data }) => {
       if (!data.user) return;
 
-      const { data: profile, error } = await supabase
+      const { data: profile } = await supabase
         .from("profiles")
         .select("full_name")
         .eq("id", data.user.id)
         .single();
 
-      if (!error) {
+      if (profile?.full_name) {
         setFullName(profile.full_name);
       }
     });
   }, []);
 
-  // ✅ LOGOUT
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/auth");
@@ -152,28 +144,43 @@ export default function Dashboard() {
           </div>
         </header>
 
-        {/* ✅ FALLBACK DASHBOARD (WHEN FEATURE FLAG IS OFF) */}
+        {/* 🌌 AURORA GATEWAY */}
         {!ENABLE_DASHBOARD && (
-          <div className="p-10 flex justify-center">
-            <div className="max-w-xl w-full bg-card rounded-2xl border border-border p-8 text-center shadow-soft">
-              <h2 className="text-2xl font-bold mb-2">
-                Your AI Learning Hub 🚀
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                Access your AI-powered tutor and start learning smarter with
-                Edurance.
-              </p>
+          <div className="flex items-center justify-center min-h-[70vh] px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="relative max-w-xl w-full rounded-3xl p-[1px]"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(124,58,237,0.45), rgba(0,212,255,0.45), rgba(16,185,129,0.45))",
+              }}
+            >
+              <div className="relative rounded-3xl bg-card px-10 py-12 text-center shadow-2xl overflow-hidden">
+                {/* Aurora glow */}
+                <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 via-cyan-400/20 to-emerald-400/20 blur-3xl opacity-70" />
 
-              <a
-                href="https://y-zeta-virid.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold hover:opacity-90 transition"
-              >
-                Launch AI Tutor
-                <ExternalLink className="w-4 h-4" />
-              </a>
-            </div>
+                <h2 className="relative text-2xl font-semibold mb-3">
+                  Your AI Tutor is ready.
+                </h2>
+
+                <p className="relative text-muted-foreground leading-relaxed mb-8">
+                  Step into a focused learning space where concepts are taught
+                  clearly, patiently, and exam-first — like a real teacher.
+                </p>
+
+                <a
+                  href="https://y-zeta-virid.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative inline-flex items-center justify-center gap-2 px-8 py-3 rounded-2xl bg-primary text-primary-foreground font-semibold hover:scale-[1.03] transition-transform"
+                >
+                  Start Learning
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
+            </motion.div>
           </div>
         )}
       </main>
