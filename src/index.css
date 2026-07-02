@@ -164,3 +164,8 @@
     transform: translateY(-20px);
   }
 }
+
+html, body {
+  overflow-x: hidden;
+  overflow-y: auto !important;
+}
